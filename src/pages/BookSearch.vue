@@ -2,12 +2,12 @@
   <div>
     <v-container>
       <v-row>
-        <v-vol cols="6">
+        <v-col cols="6">
           <v-text-field
             v-model="keyword"
             label="Search Book Titile"
           ></v-text-field>
-        </v-vol>
+        </v-col>
       </v-row>
       <v-row>
         <v-col cols="3">
@@ -27,6 +27,33 @@
           </v-btn>
         </v-col>
       </v-row>
+      <v-row>
+        <v-col
+          cols="12"
+          md="6"
+          v-for="(book, index) in searchResults" :key="book.index"
+        >
+          <v-card class="mx-auto">
+            <v-row>
+              <v-col cols="2">
+                <v-img :src="book.img"/>
+              </v-col>
+              <v-col cols="10">
+                <v-card-title>{{ book.title }}</v-card-title>
+                <v-card-text>{{ book.description }}</v-card-text>
+                <v-spacer></v-spacer>
+                <v-card-actions>
+                  <v-btn fab dark color="indigo"
+                    @click="addBookList(index)"
+                  >
+                    <v-icon>mdi-plus</v-icon>
+                  </v-btn>
+                </v-card-actions>
+              </v-col>
+            </v-row>
+          </v-card>
+        </v-col>
+      </v-row>
     </v-container>
   </div>
 </template>
@@ -37,12 +64,12 @@ export default {
   data() {
     return {
       keyword: '',
-      searchResult: []
+      searchResults: []
     }
   },
   methods: {
     async search(keyword) {
-      this.searchResult = []
+      this.searchResults = []
 
       // Crate query string
       const baseUrl = 'https://www.googleapis.com/books/v1/volumes?';
@@ -61,12 +88,13 @@ export default {
         let title = book.volumeInfo.title
         let img = book.volumeInfo.imageLinks.thumbnail
         let description = book.volumeInfo.description
-        this.searchResult.push({
+        this.searchResults.push({
           title: title ? title : 'No title',
           img: img ? img : 'https://placehold.jp/150x200.png',
           description: description ? description.slice(0, 40) : 'No description'
         })
       }
+      console.log(this.searchResults)
     }
   }
 }
