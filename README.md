@@ -24,4 +24,6 @@ npm run lint
 See [Configuration Reference](https://cli.vuejs.org/config/).
 
 ### Package
-- Vuetify
+- Vuetify 2
+  - https://v2.vuetifyjs.com/ja/
+  

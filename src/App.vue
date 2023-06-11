@@ -2,7 +2,9 @@
   <v-app>
     <HeaderComponent/>
       <v-main>
-        <router-view/>
+        <v-container>
+          <router-view/>
+        </v-container>
       </v-main>
     <FooterComponent/>
   </v-app>
