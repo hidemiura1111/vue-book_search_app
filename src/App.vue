@@ -3,7 +3,8 @@
     <HeaderComponent/>
       <v-main>
         <v-container>
-          <router-view/>
+          <router-view
+          @add-book-list="addBook"/>
         </v-container>
       </v-main>
     <FooterComponent/>
@@ -37,13 +38,15 @@ export default {
     }
   },
   methods: {
-    addBook() {
-      if (!this.newBook) {
-        return;
-      }
-
-      this.books.push(this.newBook);
-      this.newBook = '';
+    addBook(e) {
+      this.books.push({
+        id: this.books.length + 1,
+        title: e.title,
+        image: e.image,
+        description: e.description,
+        readDate: '',
+        memo: '',
+      });
       this.saveBooks();
     },
     removeBook(x) {
