@@ -35,7 +35,7 @@
         <v-card class="mx-auto">
           <v-row>
             <v-col cols="2">
-              <v-img :src="book.img"/>
+              <v-img :src="book.image"/>
             </v-col>
             <v-col cols="10">
               <v-card-title>{{ book.title }}</v-card-title>
@@ -66,6 +66,9 @@ export default {
     }
   },
   methods: {
+    addBookList(index) {
+      this.$emit('add-book-list', this.searchResults[index])
+    },
     async search(keyword) {
       this.searchResults = []
 
@@ -84,15 +87,14 @@ export default {
       // Push data to searchResult
       for (let book of response.items) {
         let title = book.volumeInfo.title
-        let img = book.volumeInfo.imageLinks.thumbnail
+        let image = book.volumeInfo.imageLinks.thumbnail
         let description = book.volumeInfo.description
         this.searchResults.push({
           title: title ? title : 'No title',
-          img: img ? img : 'https://placehold.jp/150x200.png',
+          image: image ? image : 'https://placehold.jp/150x200.png',
           description: description ? description.slice(0, 40) : 'No description'
         })
       }
-      console.log(this.searchResults)
     }
   }
 }
