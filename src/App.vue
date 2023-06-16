@@ -48,6 +48,7 @@ export default {
         memo: '',
       });
       this.saveBooks();
+      this.gotoEditPage(this.books.slice(-1)[0].id);
     },
     removeBook(x) {
       this.books.splice(x, 1);
@@ -56,7 +57,10 @@ export default {
     saveBooks() {
       const parsed = JSON.stringify(this.books);
       localStorage.setItem(STORAGE_KEY, parsed);
-    }
+    },
+    gotoEditPage(id) {
+      this.$router.push(`/edit/${id}`);
+    },
   }
 };
 </script>
