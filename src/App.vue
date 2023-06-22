@@ -4,7 +4,9 @@
       <v-main>
         <v-container>
           <router-view
-          @add-book-list="addBook"/>
+            :books="books"
+            @add-book-list="addBook"
+          />
         </v-container>
       </v-main>
     <FooterComponent/>
