@@ -1,9 +1,8 @@
 <template>
   <div>
     Book Edit
-    <!-- {{ book.title }} -->
-    {{ books[this.$route.params.id - 1].title }}
-    <!-- {{ books }} -->
+    {{ book?.title }}
+    <!-- {{ books[this.$route.params.id - 1].title }} -->
   </div>
 </template>
 
@@ -21,29 +20,22 @@ export default {
       book: ''
     }
   },
-  // beforeRouteEnter(to, from, next) {
+  watch: {
+    books: {
+      immediate: true,
+      handler() {
+        this.book = this.books[this.$route.params.id - 1];
+      }
+    }
+  }
+  // beforeRouteEnter (to, from, next) {
   //   next(vm => {
   //     vm.$nextTick(() => {
   //       console.log(vm.books);
-  //       console.log(vm.$route.params.id);
-  //       vm.book = vm.books[vm.$route.params.id];
-  //       console.log(vm.book);
+  //       vm.book = vm.books[vm.$route.params.id - 1];
   //     });
   //   });
   // }
-  
-  // created() {
-  //   this.fetchData();
-  // },
-  // methods: {
-  //   fetchData() {
-  //     console.log(this.books);
-  //     console.log(this.$route.params.id);
-  //     this.book = this.books[this.$route.params.id - 1];
-  //     console.log(this.book);
-  //   }
-  // }
-
 }
 </script>
 
