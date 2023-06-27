@@ -44,7 +44,7 @@
 
               <v-card-actions>
                 <v-btn color="secondary" to="/">Book Index</v-btn>
-                <v-btn color="info">Store</v-btn>
+                <v-btn color="info" @click="updateBookInfo">Store</v-btn>
               </v-card-actions>
             </v-col>
           </v-row>
@@ -76,6 +76,15 @@ export default {
       handler() {
         this.book = this.books[this.$route.params.id - 1];
       }
+    }
+  },
+  methods: {
+    updateBookInfo() {
+      this.$emit('update-book-info', {
+        id: this.book.id,
+        readDate: this.date,
+        memo: this.book.memo,
+      })
     }
   },
   // beforeRouteEnter (to, from, next) {

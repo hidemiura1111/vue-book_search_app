@@ -6,6 +6,7 @@
           <router-view
             :books="books"
             @add-book-list="addBook"
+            @update-book-info="updateBookInfo"
           />
         </v-container>
       </v-main>
@@ -59,6 +60,19 @@ export default {
     saveBooks() {
       const parsed = JSON.stringify(this.books);
       localStorage.setItem(STORAGE_KEY, parsed);
+    },
+    updateBookInfo(e) {
+      const updateInfo = {
+        id: e.id,
+        readDate: e.readDate,
+        memo: e.memo,
+        title: this.books[e.id - 1].title,
+        image: this.books[e.id - 1].image,
+        description: this.books[e.id - 1].description,
+      };
+      this.books.splice(e.id - 1, 1, updateInfo);
+      this.saveBooks();
+      this.$router.push('/');
     },
     gotoEditPage(id) {
       this.$router.push(`/edit/${id}`);
