@@ -74,7 +74,7 @@ export default {
     books: {
       immediate: true,
       handler() {
-        this.book = this.books[this.$route.params.id - 1];
+        this.book = this.books[this.$route.params.id];
       }
     }
   },
@@ -91,7 +91,7 @@ export default {
   //   next(vm => {
   //     vm.$nextTick(() => {
   //       console.log(vm.books);
-  //       vm.book = vm.books[vm.$route.params.id - 1];
+  //       vm.book = vm.books[vm.$route.params.id];
   //     });
   //   });
   // }

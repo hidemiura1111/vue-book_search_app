@@ -43,7 +43,7 @@ export default {
   methods: {
     addBook(e) {
       this.books.push({
-        id: this.books.length + 1,
+        id: this.books.length,
         title: e.title,
         image: e.image,
         description: e.description,
@@ -66,11 +66,11 @@ export default {
         id: e.id,
         readDate: e.readDate,
         memo: e.memo,
-        title: this.books[e.id - 1].title,
-        image: this.books[e.id - 1].image,
-        description: this.books[e.id - 1].description,
+        title: this.books[e.id].title,
+        image: this.books[e.id].image,
+        description: this.books[e.id].description,
       };
-      this.books.splice(e.id - 1, 1, updateInfo);
+      this.books.splice(e.id, 1, updateInfo);
       this.saveBooks();
       this.$router.push('/');
     },
