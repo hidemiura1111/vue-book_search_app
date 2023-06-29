@@ -4,7 +4,6 @@ import BookIndex from '@/pages/BookIndex'
 import BookSearch from '@/pages/BookSearch'
 import BookEdit from '@/pages/BookEdit'
 
-
 Vue.use(VueRouter)
 
 const routes = [
@@ -19,7 +18,7 @@ const routes = [
     component: BookSearch
   },
   {
-    path: '/edit',
+    path: '/edit/:id',
     name: 'BookEdit',
     component: BookEdit
   },
