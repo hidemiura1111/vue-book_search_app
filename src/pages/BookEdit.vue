@@ -75,6 +75,11 @@ export default {
       immediate: true,
       handler() {
         this.book = this.books[this.$route.params.id];
+        if (this.book.readDate) {
+          this.date = this.book.readDate;
+        } else {
+          this.date = new Date().toISOString().substr(0, 10);
+        }
       }
     }
   },
