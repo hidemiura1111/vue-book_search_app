@@ -7,6 +7,7 @@
             :books="books"
             @add-book-list="addBook"
             @update-book-info="updateBookInfo"
+            @remove-book="removeBook"
           />
         </v-container>
       </v-main>
@@ -53,9 +54,12 @@ export default {
       this.saveBooks();
       this.gotoEditPage(this.books.slice(-1)[0].id);
     },
-    removeBook(x) {
-      this.books.splice(x, 1);
-      this.saveBooks();
+    removeBook(book) {
+      const isDelete = `Remove "${book.title}"?`
+      if (window.confirm(isDelete)) {
+        this.books.splice(book.id, 1);
+        this.saveBooks();
+      }
     },
     saveBooks() {
       const parsed = JSON.stringify(this.books);
@@ -78,7 +82,7 @@ export default {
       this.$router.push(`/edit/${id}`);
     },
     deleteLocalStorage() {
-      const isDelete = 'delete all?'
+      const isDelete = 'Delete all?'
       if (window.confirm(isDelete)) {
         localStorage.setItem(STORAGE_KEY, '') // Not necessary
         localStorage.removeItem(STORAGE_KEY)

@@ -24,6 +24,12 @@
                 >
                   <v-icon>mdi-pencil</v-icon>
                 </v-btn>
+                <v-btn
+                  color="error" fab small dark
+                  @click="removeBook(book)"
+                >
+                  <v-icon>mdi-delete</v-icon>
+                </v-btn>
               </v-card-actions>
             </v-col>
           </v-row>
@@ -41,7 +47,11 @@ export default {
       required: false,
     },
   },
-
+  methods: {
+    removeBook(book) {
+      this.$emit('remove-book', book)
+    }
+  }
 }
 </script>
 
