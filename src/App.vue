@@ -44,7 +44,7 @@ export default {
   methods: {
     addBook(e) {
       this.books.push({
-        id: this.books.length,
+        id: this.books.length ? this.books.slice(-1)[0].id + 1 : 0,
         title: e.title,
         image: e.image,
         description: e.description,
@@ -52,12 +52,13 @@ export default {
         memo: '',
       });
       this.saveBooks();
-      this.gotoEditPage(this.books.slice(-1)[0].id);
+      this.$router.push('/');
     },
-    removeBook(book) {
-      const isDelete = `Remove "${book.title}"?`
+    removeBook(targetBook) {
+      const bookIndex = this.books.findIndex(book => book.id === targetBook.id);
+      const isDelete = `Remove "${targetBook.title}"?`
       if (window.confirm(isDelete)) {
-        this.books.splice(book.id, 1);
+        this.books.splice(bookIndex, 1);
         this.saveBooks();
       }
     },
@@ -66,15 +67,17 @@ export default {
       localStorage.setItem(STORAGE_KEY, parsed);
     },
     updateBookInfo(e) {
+      const bookIndex = this.books.findIndex(book => book.id === e.id);
+      const book = this.books.find(book => book.id === e.id);
       const updateInfo = {
         id: e.id,
         readDate: e.readDate,
         memo: e.memo,
-        title: this.books[e.id].title,
-        image: this.books[e.id].image,
-        description: this.books[e.id].description,
+        title: book.title,
+        image: book.image,
+        description: book.description,
       };
-      this.books.splice(e.id, 1, updateInfo);
+      this.books.splice(bookIndex, 1, updateInfo);
       this.saveBooks();
       this.$router.push('/');
     },

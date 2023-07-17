@@ -74,7 +74,7 @@ export default {
     books: {
       immediate: true,
       handler() {
-        this.book = this.books[this.$route.params.id];
+        this.book = this.books.find(book => book.id === this.$route.params.id);
         if (this.book.readDate) {
           this.date = this.book.readDate;
         } else {
@@ -95,7 +95,6 @@ export default {
   // beforeRouteEnter (to, from, next) {
   //   next(vm => {
   //     vm.$nextTick(() => {
-  //       console.log(vm.books);
   //       vm.book = vm.books[vm.$route.params.id];
   //     });
   //   });
