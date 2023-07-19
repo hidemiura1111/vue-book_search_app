@@ -60,6 +60,7 @@ export default {
       if (window.confirm(isDelete)) {
         this.books.splice(bookIndex, 1);
         this.saveBooks();
+        this.$router.push('/');
       }
     },
     saveBooks() {
