@@ -1,12 +1,13 @@
 <template>
   <v-app>
-    <HeaderComponent/>
+    <HeaderComponent @delete-local-storage="deleteLocalStorage"/>
       <v-main>
         <v-container>
           <router-view
             :books="books"
             @add-book-list="addBook"
             @update-book-info="updateBookInfo"
+            @remove-book="removeBook"
           />
         </v-container>
       </v-main>
@@ -43,7 +44,7 @@ export default {
   methods: {
     addBook(e) {
       this.books.push({
-        id: this.books.length,
+        id: this.books.length ? this.books.slice(-1)[0].id + 1 : 0,
         title: e.title,
         image: e.image,
         description: e.description,
@@ -51,32 +52,48 @@ export default {
         memo: '',
       });
       this.saveBooks();
-      this.gotoEditPage(this.books.slice(-1)[0].id);
+      this.$router.push('/');
     },
-    removeBook(x) {
-      this.books.splice(x, 1);
-      this.saveBooks();
+    removeBook(targetBook) {
+      const bookIndex = this.books.findIndex(book => book.id === targetBook.id);
+      const isDelete = `Remove "${targetBook.title}"?`
+      if (window.confirm(isDelete)) {
+        this.books.splice(bookIndex, 1);
+        this.saveBooks();
+        this.$router.push('/');
+      }
     },
     saveBooks() {
       const parsed = JSON.stringify(this.books);
       localStorage.setItem(STORAGE_KEY, parsed);
     },
     updateBookInfo(e) {
+      const bookIndex = this.books.findIndex(book => book.id === e.id);
+      const book = this.books.find(book => book.id === e.id);
       const updateInfo = {
         id: e.id,
         readDate: e.readDate,
         memo: e.memo,
-        title: this.books[e.id].title,
-        image: this.books[e.id].image,
-        description: this.books[e.id].description,
+        title: book.title,
+        image: book.image,
+        description: book.description,
       };
-      this.books.splice(e.id, 1, updateInfo);
+      this.books.splice(bookIndex, 1, updateInfo);
       this.saveBooks();
       this.$router.push('/');
     },
     gotoEditPage(id) {
       this.$router.push(`/edit/${id}`);
     },
+    deleteLocalStorage() {
+      const isDelete = 'Delete all?'
+      if (window.confirm(isDelete)) {
+        localStorage.setItem(STORAGE_KEY, '') // Not necessary
+        localStorage.removeItem(STORAGE_KEY)
+        this.books = []
+        window.location.reload()
+      }
+    }
   }
 };
 </script>
