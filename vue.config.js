@@ -4,4 +4,5 @@ module.exports = defineConfig({
     'vuetify'
   ],
   publicPath: ''
+  // publicPath: '/dev/book_search_app'
 })

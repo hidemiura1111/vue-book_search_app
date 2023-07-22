@@ -27,3 +27,6 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 - Vuetify 2
   - https://v2.vuetifyjs.com/ja/
   
+### Deploy
+- https://samaime.net/dev/book_search_app/
+- Set root path in `vue.config.js`
