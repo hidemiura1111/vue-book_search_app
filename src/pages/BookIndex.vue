@@ -14,8 +14,8 @@
             </v-col>
             <v-col cols="8">
               <v-card-title>{{ book.title }}</v-card-title>
-              Read Date: {{ book.readDate }}
-              Impressions: {{ book.memo }}
+              <p>Read Date: {{ book.readDate }}</p>
+              <p>Impressions: {{ book.memo }}</p>
               <v-spacer></v-spacer>
               <v-card-actions>
                 <v-btn
