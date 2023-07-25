@@ -11,7 +11,7 @@
         class="primary py-4 text-center white--text"
         cols="12"
       >
-        {{ new Date().getFullYear() }} — <strong>Book Search APP</strong>
+        {{ new Date().getFullYear() }} — <strong>Book Search App</strong>
       </v-col>
     </v-row>
   </v-footer>

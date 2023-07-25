@@ -1,4 +1,4 @@
-# vue-bookapp
+# Book Search App
 
 ## Project setup
 ```
